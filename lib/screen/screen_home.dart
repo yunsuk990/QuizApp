@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quizapp/screen/screen_quiz.dart';
+import '../model/quiz_dart.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -7,6 +9,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  List<Quiz> quizes = [
+    Quiz.fromMap({
+      'title' : 'test',
+      'candidates': ['a','b','c','d'],
+      'answer' : 0
+    }),
+    Quiz.fromMap({
+      'title' : 'test',
+      'candidates': ['a','b','c','d'],
+      'answer' : 0
+    }),
+    Quiz.fromMap({
+      'title' : 'test',
+      'candidates': ['a','b','c','d'],
+      'answer' : 0
+    }),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: MaterialButton(
                       child: Text('지금 퀴즈 풀기', style: TextStyle(color: Colors.white),),
                       color: Colors.deepPurple,
-                      onPressed: () {  },
+                      onPressed: () {
+                        Navigator.of(context).push( MaterialPageRoute(builder: (context) => QuizScreen(quizes)));
+                      },
                     ),
                   ),
                 ),
