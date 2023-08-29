@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:quizapp/widget/widget_candidate.dart';
 
 import '../model/quiz_dart.dart';
@@ -21,7 +21,13 @@ class _QuizScreenState extends State<QuizScreen> {
   List<bool> _answerState = [false, false, false, false];
   //현재 어떤 문제를 보고 있는지
   int _currentIndex = 0;
+  SwiperController _controller = SwiperController();
 
+
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -39,8 +45,9 @@ class _QuizScreenState extends State<QuizScreen> {
           width: width*0.85,
           height: height*0.5,
           child: Swiper(
-            physics: NeverScrollableScrollPhysics(),
+            controller: _controller,
             loop: false,
+            physics: NeverScrollableScrollPhysics(),
             itemCount: widget.quizes.length,
             itemBuilder: (BuildContext context, int index){
               return _buildQuizCard(widget.quizes[index], width, height);
@@ -59,6 +66,7 @@ class _QuizScreenState extends State<QuizScreen> {
           color: Colors.white
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
 
           Container(
@@ -75,6 +83,33 @@ class _QuizScreenState extends State<QuizScreen> {
 
           Column(
             children: _buildCandidates(width,quiz)
+          ),
+          
+          Container(
+            padding: EdgeInsets.all(width*0.024),
+            child: Center(child: ButtonTheme(
+                minWidth: width*0.5,
+                height: height*0.05,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: MaterialButton(
+                    textColor: _answers[_currentIndex] == -1 ? Colors.black : Colors.white,
+                    disabledColor: Colors.grey,
+                    color: Colors.deepPurple,
+                    onPressed:
+                      (_answers[_currentIndex] == -1) ? null : () {
+                        if(_currentIndex == widget.quizes.length-1){}
+                        else{
+                          _answerState = [false,false,false,false];
+                          _currentIndex += 1;
+                          _controller.next();
+                        }
+                    },
+                    child: _currentIndex == widget.quizes.length-1 ? Text("결과보기") : Text("다음문제"),
+                )
+              )
+            )
           )
 
         ],
