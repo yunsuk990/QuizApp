@@ -17,12 +17,12 @@ class _HomeScreenState extends State<HomeScreen> {
       'answer' : 0
     }),
     Quiz.fromMap({
-      'title' : 'test',
+      'title' : 'test1',
       'candidates': ['a','b','c','d'],
       'answer' : 0
     }),
     Quiz.fromMap({
-      'title' : 'test',
+      'title' : 'test2',
       'candidates': ['a','b','c','d'],
       'answer' : 0
     }),
