@@ -11,7 +11,4 @@ class Quiz {
       : title = map['title'],
         candidates = map['candidates'],
         answer = map['answer'];
-
-
-
 }
