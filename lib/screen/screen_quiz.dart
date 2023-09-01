@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:quizapp/screen/screen_result.dart';
 import 'package:quizapp/widget/widget_candidate.dart';
 
 import '../model/quiz_dart.dart';
@@ -99,7 +100,9 @@ class _QuizScreenState extends State<QuizScreen> {
                     color: Colors.deepPurple,
                     onPressed:
                       (_answers[_currentIndex] == -1) ? null : () {
-                        if(_currentIndex == widget.quizes.length-1){}
+                        if(_currentIndex == widget.quizes.length-1){ 
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ResultScreen(answers: _answers, quizs: widget.quizes)));
+                        }
                         else{
                           _answerState = [false,false,false,false];
                           _currentIndex += 1;
