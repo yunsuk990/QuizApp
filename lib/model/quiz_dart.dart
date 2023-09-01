@@ -1,5 +1,3 @@
-
-
 class Quiz {
 
   String title;
